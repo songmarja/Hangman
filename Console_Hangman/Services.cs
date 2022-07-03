@@ -10,7 +10,9 @@ namespace Console_Hangman
 {
     public  static class Services
     {
-       
+        /// <summary>
+        /// Gets the header for the game/app
+        /// </summary>
         public static void GetHeader()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -78,6 +80,10 @@ namespace Console_Hangman
             return secretChars;
         }
 
+        /// <summary>
+        /// Get all the words from file
+        /// </summary>
+        /// <returns></returns>
         public static string[] GetSecretWordsFromFile()
         {
             string[] secretWords = new string[17];
@@ -99,6 +105,7 @@ namespace Console_Hangman
             }
             return secretWords;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -117,13 +124,24 @@ namespace Console_Hangman
         }
 
 
-
+        /// <summary>
+        /// Check if guessed word is equal with secret word
+        /// </summary>
+        /// <param name="secretChars"></param>
+        /// <param name="inputLetters"></param>
+        /// <returns></returns>
         public static bool CheckIfIsEqual(char[] secretChars, string inputLetters)
         {
             bool isEqual = secretChars.SequenceEqual(inputLetters.ToCharArray());
             return isEqual;
         }
 
+        /// <summary>
+        /// Check if the letters have given the secret word, after each letter guess
+        /// </summary>
+        /// <param name="secretChars"></param>
+        /// <param name="guessedChars"></param>
+        /// <returns></returns>
         public static bool CorrectWordGuess(char[] secretChars, char[] guessedChars)
         {
             bool isEqual = secretChars.SequenceEqual(guessedChars);
@@ -131,18 +149,22 @@ namespace Console_Hangman
             return isEqual;
         }
 
-
+        /// <summary>
+        /// Shows as many dashes  as for the secret word for user
+        /// </summary>
+        /// <param name="letters"></param>
+        /// <returns></returns>
         public static char[] ShowSecretWordWithDashes(char[] letters)
         {
             char[] guessedChars = new char[letters.Length];
             int indx = 0;
 
-            //TODO*********** Comment out show secretChars, when playing
-            foreach (char letter in letters)
-            {
-                Console.Write($"{letter} -  ");
-            }
-            Console.WriteLine();
+            ////TODO*********** Comment out show secretChars, when playing
+            //foreach (char letter in letters)
+            //{
+            //    Console.Write($"{letter} -  ");
+            //}
+            //Console.WriteLine();
 
             foreach (char letter in guessedChars)
             {
@@ -154,20 +176,33 @@ namespace Console_Hangman
 
         }
         
-        public static string ThrowIfNullOrEmpty(this string value, string name)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(name);
-            }
-            if (value == "")
-            {
-                throw new ArgumentException("Argument must not be the empty string.",
-                                            name);
-            }
-            return value;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="value"></param>
+        ///// <param name="name"></param>
+        ///// <returns></returns>
+        ///// <exception cref="ArgumentNullException"></exception>
+        ///// <exception cref="ArgumentException"></exception>
+        //public static string ThrowIfNullOrEmpty(this string value, string name)
+        //{
+        //    if (value == null)
+        //    {
+        //        throw new ArgumentNullException(name);
+        //    }
+        //    if (value == "")
+        //    {
+        //        throw new ArgumentException("Argument must not be the empty string.",
+        //                                    name);
+        //    }
+        //    return value;
+        //}
 
+        /// <summary>
+        /// Adds the wrong guessed letters to the stringbuilder
+        /// </summary>
+        /// <param name="inputLetter"></param>
+        /// <returns></returns>
         public static StringBuilder AddGuessedLetter(string inputLetter)
         {
             StringBuilder guessedLetters = new StringBuilder();
@@ -175,6 +210,13 @@ namespace Console_Hangman
             return guessedLetters;
         }
 
+        /// <summary>
+        /// Check in stringbuilder if it is for 1st time this letter has been guessed. 
+        /// If not => The guess should not be counted
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static bool FirstGuess(StringBuilder sb, string input)
         {
 ;            bool firstGuess = true;
@@ -189,6 +231,13 @@ namespace Console_Hangman
             return firstGuess;
         }
 
+        /// <summary>
+        /// Updates the correct guessed letters in guessedChars[]
+        /// </summary>
+        /// <param name="guessedChars"></param>
+        /// <param name="secretChars"></param>
+        /// <param name="inputLetter"></param>
+        /// <returns></returns>
         public static char[] UpdateGuessedChars(char[] guessedChars, char[] secretChars,char inputLetter)
         {
             for (int i = 0; i < secretChars.Length; i++)
@@ -198,7 +247,6 @@ namespace Console_Hangman
                 {
                     guessedChars[i] = inputLetter;
                 }
-               
             }
             return guessedChars;
         }

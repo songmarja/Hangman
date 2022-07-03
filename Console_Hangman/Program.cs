@@ -19,9 +19,7 @@ namespace Console_Hangman
                 //Check if user wants to play
                 userWantsToPlay = ReadyToPlay();
 
-                // Gets the random, secret word from string array and
-                //  "Convert" the string into a char array
-                //string[] secretWords = GetSecretWordsFromFile();
+                // Gets the random, secret word from string array, read from file.
                 char[] secretChars = GetSecretRandomWordFromFile();
 
                 //Show the secret word by lower dashes for user
@@ -44,7 +42,6 @@ namespace Console_Hangman
                         if (equalWords == true)
                         {
                             Console.WriteLine($"**** CONGRATULATION! You found out the word! **** ");
-                            //CreateUserMessage();
                             correctGuess = true;
                         }
                         // It was not the secret word
@@ -54,8 +51,6 @@ namespace Console_Hangman
                             {
                                 Console.WriteLine("**** You missed it! You have used your 10 guesses. ****");
                                 notTooManyGuesses = false;
-                                //CreateUserMessage();
-                                //TODO***** Validation, if want to play another game..
                             }
                             Console.WriteLine("**** Sorry, not the word I think about, but try again! ****");
                         }
@@ -93,7 +88,6 @@ namespace Console_Hangman
                             {
                                 Console.WriteLine($"**** CONGRATULATION! You found out the word! ****");
                                 correctGuess = true;
-                                //Console.WriteLine("Do you want to play another game? y (yes) /n (no): ");
                             }
                             guessCount++;
                         }
@@ -102,7 +96,6 @@ namespace Console_Hangman
                         {
                             Console.WriteLine("\n**** SORRY! You missed it! You have used your 10 guesses. ****");
                             notTooManyGuesses = false;
-                            //TODO***** Validation, if want to play another game..
                         }
 
                         foreach (char letter in guessedChars)
